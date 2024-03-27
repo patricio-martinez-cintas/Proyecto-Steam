@@ -6,6 +6,5 @@ pandas
 pyarrow
 uvicorn
 pip
-pyarrow
 random
 python
