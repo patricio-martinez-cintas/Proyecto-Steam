@@ -3,6 +3,7 @@
 <p align="center">
   <img src="/Recursos/Steam.png" alt="Steam logo">
 </p>
+
 ## OBJETIVO DEL PROYECTO: 
 
 El objetivo principal de este proyecto fue desarrollar funciones específicas para trabajar con la base de datos de Steam. Estas funciones se enfocaron en proporcionar recomendaciones y datos clave sobre los juegos de la plataforma Steam. Todo esto fue diseñado para ser integrado en FastAPI y luego desplegado en Render.
