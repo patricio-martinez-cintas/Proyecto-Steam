@@ -1,0 +1,10 @@
+fastapi
+jupyter_client
+jupyter_core
+numpy
+pandas
+pyarrow
+uvicorn
+pip
+random
+pyarrow
