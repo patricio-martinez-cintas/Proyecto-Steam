@@ -1,28 +1,44 @@
-# PI 1 -STEAM
+# <p align="center">**Proyecto Steam**</p>
 
+<p align="center">
+  <img src="/Recursos/Steam.png" alt="Steam logo">
+</p>
 ## OBJETIVO DEL PROYECTO: 
 
-El objetivo de este proyecto se centró en la lectura, transformación y análisis de tres bases de datos de la página de juegos 'Steam' con el objetivo de construir funciones de consultas en fast api y deployar en render.
+El objetivo principal de este proyecto fue desarrollar funciones específicas para trabajar con la base de datos de Steam. Estas funciones se enfocaron en proporcionar recomendaciones y datos clave sobre los juegos de la plataforma Steam. Todo esto fue diseñado para ser integrado en FastAPI y luego desplegado en Render.
 
 ## PARTES DEL PROYECTO
-## ETL
-- **EXTRACT:** Se realizó la lectura de los 3 dataset en el cual dos de ellos “review” y “item” necesitaron un tratamiento especial y una función creada para poder ser leídas ya que ambos archivos estaban corruptos.
 
--**EDA:** El análisis exploratorio en mi caso se realizó en primer lugar después de la extracción de los datos donde se pudo observar las columnas necesarias y datos necesarios para el proyecto, también así se observó los tipos de datos nulos y duplicados que habían.
+**EDA:** 
+Se realizó un análisis exploratorio de los datos de los 3 conjuntos de datos, en el cual dos de ellos, "review" y "item", requirieron un tratamiento especial y la creación de una función para poder ser leídos, ya que ambos archivos estaban corruptos. Estas bases de datos fueron guardadas en nuevos archivos en formato Parquet y comprimidos en formato gzip para mejorar su lectura para el ETL. Además, se exploró información importante de los 3 conjuntos de datos, como el número de duplicados, outliers, la cantidad de columnas y filas, los tipos de variables, valores nulos, entre otros aspectos relevantes.
 
--**TRANSFORMATION:** Después de la transformación de los datos necesarios de cada columna, descartamos columnas innecesarias, borramos duplicados y nulos que no necesitaramos y se desnido aquellas columnas que tenían una doble anidación de lista con diccionarios en su interior para extraer y colocar en columnas aparte los valores necesarias de allí para el proyecto. 
++ [EDA link](/EDA/EDA.ipynb)
 
--**LOAD:** Finalmente los datasets listos se re guardaron en una carpeta aparte llamada ‘DATASETS_FIXED’ con el formato de parquet y comprimida con gz con el objetivo de reducir su tamaño y futuras lecturas, asi como tambien permitirme de esta forma guardarla en github ya que tiene un límite del tamaño de los archivos.
 
-## FAST API Y RENDER:
--**FUNCTION FAST API:** Se construyeron 5 funciones que permiten realizar consultas a la base de datos y que posteriormente se subieron  a fast api para deployar en render.
+**ETL:** Se realizaron las transformaciones necesarias en las tres bases de datos, manteniendo únicamente los valores relevantes para la realización del proyecto. Posteriormente, se guardaron estas bases de datos finales para su uso en las funciones del proyecto.
 
-La primera llamada **developer** en la cual se recibe un parámetro de tipo string con la desarrolladora y developer, donde devuelve la cantidad de ítems de esa desarrolladora por año y su contenido free por año también.
++ [EDA link](/ETL/ETL.ipynb)
 
-La segunda función llamada **UserForGenre** recibe como parámetro el dato string genero y te devuelve el usuario que acumula más horas jugadas para el género dado y una lista acumulada de horas jugadas por año de lanzamiento.
 
-La tercera función llamada **best_developer_year** recibe como parámetro un tipo de dato entero con el año y devuelve el top desarrolladores con juegos más recomendados por usuarios para el año dado.
+**CREACIÓN DE LAS FUNCIONES:** Se construyeron 5 funciones que permiten realizar consultas a la base de datos y que posteriormente se subieron a fast api para deployar en Render. 
 
-La cuarta función llamada **developer_reviews_analysis** recibe como dato un tipo string de una desarrolladora en la cual nos devuelve la cantidad de reseñas positivas y negativas hechas por los usuarios
++ [Funciones link](/Funciones%20fastapi/Function_api.ipynb)
 
-Finalmente se construyo como quinta funcion relacionada al machine learning la llamada **recomendacion_juego** donde ingresamos como parametro el id de algun juego y nos devuelve 5 juegos recomendados de forma aleatoria.
+Estas funciones son:
+
++ **`developer:`** Esta función recibe como parámetro el desarrollador en formato str y devuelve un diccionario con la cantidad de items por año y el porcentaje de juegos free que hay en cada año.
+
++ **`UserForGenre:`** Esta función recibe como parámetro el género en str de un juego y devuelve el usuario que ha jugado más horas en ese género, junto con las horas jugadas por ese usuario en ese género a lo largo de los años.
+
++ **`sentiment_analysis:`** Esta función recibe como parámetro la empresa desarrolladora de tipo str y devuelve un diccionario con el nombre de la desarrolladora como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento positivo o negativo como valor.
+
++ **`game_recommendation:`** Esta función recibe como parámetro la ID de un juego en formato int y devuelve 5 juegos aleatorios recomendables si encuentra la ID en el sistema, y 5 juegos aleatorios si no la encuentra.
+
++ **`best_developer_year:`** Esta función recibe como parametro el str año y devuelve el top 3 de desarrolladoras con juegos mas recomendados por usuarios para el año dado.
+
+
+**FAST API Y RENDER:** Se creo el entorno vitual para fastapi y se construyo el main.py necesario para usar las funciones.
+
++ [Fastapi main link](/main.py)
+
+Finalmente se uso Render para deployar fastapi en una página web.
